@@ -19,3 +19,17 @@ script:
 
 after_success:
   - docker-compose down
+  - docker build -t rupak08012/analyze_string:latest -t rupak08012/analyze_string:$SHA ./
+  - docker tag rupak08012/analyze_string registry.heroku.com/$HEROKU_APP_NAME/web
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+
+deploy:
+  provider: script
+  script:
+    docker push rupak08012/analyze_string:latest;
+    docker push rupak08012/analyze_string:$SHA;
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+    heroku container:release web --app $HEROKU_APP_NAME
+  on:
+    branch: master
