@@ -15,4 +15,4 @@ script:
   - docker exec -it analyze /bin/sh -c "npm run test:api"
 
 after_success:
-  - docker-compose kill
+  - docker-compose down
