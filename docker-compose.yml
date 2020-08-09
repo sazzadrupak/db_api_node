@@ -1,9 +1,11 @@
 version: '3.3'
 services:
   analyze:
+    image: analyze
     build:
       dockerfile: Dockerfile.dev
       context: ./
+    container_name: analyze 
     volumes:
       - /home/node/app/node_modules
       - ./:/home/node/app

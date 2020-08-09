@@ -12,7 +12,7 @@ before_script:
   - docker-compose up -d
 
 script:
-  - docker ps -a
+  - docker exec -it analyze /bin/sh -c "npm run test:api"
 
-after_script:
+after_success:
   - docker-compose kill
