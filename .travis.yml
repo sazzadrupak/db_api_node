@@ -8,8 +8,11 @@ env:
     - SHA=$(git rev-parse HEAD)
 
 before_script:
-  - docker-compose up --build
+  - docker-compose build
+  - docker-compose up -d
 
 script:
   - docker ps -a
-  - docker-compose down
+
+after_script:
+  - docker-compose kill
