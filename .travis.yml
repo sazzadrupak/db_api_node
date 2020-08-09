@@ -9,9 +9,10 @@ env:
 
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  - docker build -t rupak08012/db_api_node -f ./Dockerfile.dev .
 
 script:
-  - docker-compose run analyze sh -c "npm run lint && npm run test:api"
+  - docker run -e CI=true sazzadrupak/db_api_node npm run test:api
 
 after_success:
   - docker build -t rupak08012/db_api_node:latest -t rupak08012/db_api_node:$SHA ./
