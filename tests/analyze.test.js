@@ -3,11 +3,9 @@ const chai = require('chai');
 const supertest = require('supertest');
 
 const { expect } = chai;
-let server;
+let server = supertest.agent(`http://0.0.0.0:8000`);
 
 describe('Check /analyze POST api', () => {
-  beforeEach(() => { server = supertest.agent(`http://analyze:8000`); });
-
   const exec = (data) => server
     .post('/analyze')
     .set('Content-Type', 'application/json')
