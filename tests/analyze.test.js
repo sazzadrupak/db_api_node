@@ -6,7 +6,7 @@ const { expect } = chai;
 let server;
 
 describe('Check /analyze POST api', () => {
-  beforeEach(() => { server = supertest.agent(`http://analyze:8000`); });
+  beforeEach(() => { server = supertest.agent(`http://localhost:8000`); });
 
   const exec = (data) => server
     .post('/analyze')
