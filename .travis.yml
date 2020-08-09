@@ -7,12 +7,15 @@ env:
   global:
     - SHA=$(git rev-parse HEAD)
 
+before_install:
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+
 before_script:
   - docker-compose build
   - docker-compose up -d
 
 script:
-  - docker exec -it analyze /bin/sh -c "npm run test:api"
+  - docker exec -it analyze /bin/sh -c "npm run lint && npm run test:api"
 
 after_success:
   - docker-compose down
