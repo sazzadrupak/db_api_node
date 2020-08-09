@@ -11,7 +11,7 @@ before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
 
 script:
-  - docker-compose run app sh -c "npm run lint && npm run test:api"
+  - docker-compose run analyze sh -c "npm run lint && npm run test:api"
 
 after_success:
   - docker build -t rupak08012/db_api_node:latest -t rupak08012/db_api_node:$SHA ./
