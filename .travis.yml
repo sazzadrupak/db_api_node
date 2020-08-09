@@ -12,6 +12,7 @@ before_install:
   - docker build -t rupak08012/db_api_node -f ./Dockerfile.dev .
 
 script:
+  - docker ps -a
   - docker run -e CI=true rupak08012/db_api_node npm run test:api
 
 after_success:
